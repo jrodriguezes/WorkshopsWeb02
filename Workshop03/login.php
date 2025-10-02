@@ -1,6 +1,5 @@
 <?php
 include('bd/getDBData.php');
-include('bd/validations.php');
 
 $states = getStates();
 
@@ -27,9 +26,10 @@ $userData = $user ? getUserByName($user) : null;
 
 <label>Provincia</label>
 <select disabled>
-    <?php foreach ($states as $state): ?>
-        <option value="<?= $state['id'] ?>" <?= isset($userData['stateId']) && $userData['stateId'] == $state['id'] ? 'selected' : '' ?>>
-            <?= $state['state'] ?>
-        </option>
-    <?php endforeach; ?>
+    <?php foreach ($states as $state) {
+        $selected = (isset($userData['stateId']) && $userData['stateId'] == $state['id']) ? 'selected' : '';
+        ?>
+
+        <option value="<?= $state['id'] ?>" <?= $selected ?>><?= $state['state'] ?></option>
+    <?php } ?>
 </select>
